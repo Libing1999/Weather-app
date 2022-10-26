@@ -7,12 +7,13 @@ body {
     height: 100vh;
     background-image: url('https://source.unsplash.com/1600x900/?landscape');
     background-size: cover;
+
 }
 
 .card {
     background: black;
     opacity: .5;
-    height: 55vh;
+    height: 60vh;
     width: 45vh;
     border-radius: 50px;
     flex-wrap: wrap;
@@ -73,6 +74,7 @@ button:hover {
     text-align: center;
     padding: 20px;
     letter-spacing: .325rem;
+
 }
 
 .date {
@@ -90,7 +92,7 @@ button:hover {
     color: greenyellow;
 }
 
-.min-max {
+.humidity {
     font-size: 18px;
     font-weight: bold;
     text-align: center;
@@ -98,7 +100,7 @@ button:hover {
 
 }
 
-.minmax {
+.humidity {
     font-size: 25px;
     font-weight: bold;
     text-align: center;
@@ -142,6 +144,7 @@ button:hover {
 
     .card {
         width: 60vw;
+        height: 65vh;
 
     }
 

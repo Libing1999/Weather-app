@@ -2,7 +2,7 @@ var inputValue = document.querySelector('#search')
 var button = document.querySelector('#add')
 var cityOutput = document.querySelector('#city')
 var temperature = document.querySelector('#temp')
-var minMax = document.querySelector('#min-max')
+var humidity = document.querySelector('#humidity')
 var description = document.querySelector('#weather')
 
 apikey = "994e3fe2038c37a2edd8ad0a808ebb10"
@@ -25,11 +25,11 @@ button.addEventListener('click', function () {
             cityOutput.innerHTML = `Weather in <span>${nameval}</span>`
             temperature.innerHTML = `${convertion(tempature)}&deg C`
             description.innerHTML = `${descrip}`
-            minMax.innerHTML = `Humidity:${humid}%`
+            humidity.innerHTML = `Humidity:${humid}%`
         })
         .catch(err => alert('You entered Wrong city name'))
-})
 
+})
 
 
 //date updation
