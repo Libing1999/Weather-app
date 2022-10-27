@@ -4,15 +4,49 @@ var cityOutput = document.querySelector('#city')
 var temperature = document.querySelector('#temp')
 var humidity = document.querySelector('#humidity')
 var description = document.querySelector('#weather')
+var cityError = document.getElementById('city-error');
+var resultError = document.getElementById('result-error');
 
-apikey = "994e3fe2038c37a2edd8ad0a808ebb10"
+
+apikey = "97ae2f100f4d78fe1d018be856d1ba6a"
+
+
+function validateCity() {
+    var city = document.getElementById('search').value;
+    if (city.length == 0) {
+        cityError.innerHTML = ' city is required!';
+        cityError.style.color = 'red';
+        cityError.style.display = 'block';
+        setTimeout(function () { cityError.style.display = 'none'; }, 3000);
+        return false;
+    }
+    if (!city.match(/^[A-Za-z]*[A-Za-z]*$/)) {
+        cityError.innerHTML = 'Enter the valid city name';
+        cityError.style.color = 'red';
+        cityError.style.display = 'block';
+        setTimeout(function () { cityError.style.display = 'none'; }, 3000);
+        return false;
+    }
+    cityError.innerHTML = '';
+    return true;
+}
 
 
 function convertion(val) {
     return (val - 273).toFixed(2)
 }
 
+
+inputValue.addEventListener("keyup", function (event) {
+    if (event.keyCode === 13) {
+        document.getElementById("add").click();
+    }
+});
+
+
 button.addEventListener('click', function () {
+    //setInterval(function () {
+
     fetch('https://api.openweathermap.org/data/2.5/weather?q=' + inputValue.value + '&appid=' + apikey)
         .then(res => res.json())
         .then(data => {
@@ -26,8 +60,17 @@ button.addEventListener('click', function () {
             temperature.innerHTML = `${convertion(tempature)}&deg C`
             description.innerHTML = `${descrip}`
             humidity.innerHTML = `Humidity:${humid}%`
+
+            //}, 1000);
+
         })
-        .catch(err => alert('You entered Wrong city name'))
+
+        .catch(err => {
+            resultError.innerHTML = 'Please enter a city name'
+            resultError.style.color = 'red';
+            resultError.style.display = 'block';
+            setTimeout(function () { resultError.style.display = 'none'; }, 1000);
+        })
 
 })
 
@@ -65,5 +108,5 @@ function updateNew() {
 }
 function initNextDate() {
     updateNew();
-    window.setInterval("updateNew()", 1);
+    window.setInterval("updateNew()", 1000);
 }
