@@ -23,7 +23,6 @@ body {
     border: 5px solid rgba(255, 255, 255, 0.18);
     box-shadow: 5px 18px 32px 10px rgba(31, 38, 135, 1.2);
     border: 1px solid rgba(255, 255, 255, .18);
-
 }
 
 .main {
@@ -55,7 +54,6 @@ button:hover {
     height: 28px;
     width: 220px;
     font-size: 155%;
-
     font-family: 'Open Sans', sans-serif;
     color: greenyellow;
     background-color: black;

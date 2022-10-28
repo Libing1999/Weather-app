@@ -9,16 +9,13 @@
     <title>Weather</title>
 </head>
 
-<body onload="initDate();initNextDate();initWeather()">
-
+<body onload="initDate();initNextDate()">
     <div class="card">
-        <!-- <label id="city-error"></label> -->
+        <label id="city-error"></label>
         <label id="result-error"></label>
         <div class="main">
-
             <input type="text" class="search" id="search" placeholder="City Name" onkeyup="validateCity()">
-
-            <button id="add" onclick="return validateCity()"><svg id="add" stroke="currentColor" fill="currentColor"
+            <button id="add" onclick="updateWeather()"><svg id="add" stroke="currentColor" fill="currentColor"
                     stroke-width="0" viewBox="0 0 1024 1024" height="1.5em" width="1.5em"
                     xmlns="http://www.w3.org/2000/svg">
                     <path
@@ -26,12 +23,9 @@
                     </path>
                 </svg></button>
         </div>
-
         <div class="weather-body">
-
             <div class="location">
                 <div class="city" id="city">Weather in Alappuzha</div>
-
                 <div class="date" id="date"><span id="daynum">10</span>&nbsp<span id="month">Jan</span>&nbsp<span
                         id="dayname">Monday,</span>&nbsp<span class="year" id="year">2022</span></div>
 

@@ -7,10 +7,8 @@ var description = document.querySelector('#weather')
 var cityError = document.getElementById('city-error');
 var resultError = document.getElementById('result-error');
 
-
 apikey = "97ae2f100f4d78fe1d018be856d1ba6a"
-
-
+//validation
 function validateCity() {
     var city = document.getElementById('search').value;
     if (city.length == 0) {
@@ -30,51 +28,34 @@ function validateCity() {
     cityError.innerHTML = '';
     return true;
 }
-
-
 function convertion(val) {
     return (val - 273).toFixed(2)
 }
-
-
 inputValue.addEventListener("keyup", function (event) {
     if (event.keyCode === 13) {
         document.getElementById("add").click();
     }
 });
+//refresh every 5 sec
+setInterval(updateWeather(), 5000);
 
-
-button.addEventListener('click', function () {
-    //setInterval(function () {
-
-    fetch('https://api.openweathermap.org/data/2.5/weather?q=' + inputValue.value + '&appid=' + apikey)
-        .then(res => res.json())
-        .then(data => {
-
-            var nameval = data['name']
-            var descrip = data['weather']['0']['description']
-            var tempature = data['main']['temp']
-            var humid = data['main']['humidity']
-
-            cityOutput.innerHTML = `Weather in <span>${nameval}</span>`
-            temperature.innerHTML = `${convertion(tempature)}&deg C`
-            description.innerHTML = `${descrip}`
-            humidity.innerHTML = `Humidity:${humid}%`
-
-            //}, 1000);
-
-        })
-
-        .catch(err => {
-            resultError.innerHTML = 'Please enter a city name'
-            resultError.style.color = 'red';
-            resultError.style.display = 'block';
-            setTimeout(function () { resultError.style.display = 'none'; }, 1000);
-        })
-
-})
-
-
+const updateWeather = async () => {
+    try {
+        const response = await fetch('https://api.openweathermap.org/data/2.5/weather?q=' + inputValue.value + '&appid=' + apikey);
+        const data = await response.json();
+        cityOutput.innerHTML = `Weather  <span>${data.name ? data.name : "Not available"}<span>`
+        temperature.innerHTML = `<span>${convertion(data.main.temp ? data.main.temp : "Not available")} C</span>`
+        description.innerHTML = `<span>${data.weather[0].description ? data.weather[0].description : "Not available"}<span>`
+        humidity.innerHTML = `Humidity: <span>${data.main.humidity ? data.main.humidity : "Not available"} %<span>`
+    }
+    catch (err) {
+        console.log(err)
+        resultError.innerHTML = 'Enter a city name'
+        resultError.style.color = "red"
+        resultError.style.display = 'block'
+        setTimeout(function () { resultError.style.display = 'none'; }, 3000);
+    }
+}
 //date updation
 function updateDate() {
     var now = new Date();
@@ -82,7 +63,6 @@ function updateDate() {
     var month = now.getMonth();
     var dname = now.getDay();
     var yr = now.getFullYear();
-
     var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
     var week = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
     var ids = ["daynum", "month", "dayname", "year"];
@@ -94,7 +74,6 @@ function initDate() {
     updateDate();
     window.setInterval("updateDate()", 1000);
 }
-
 function updateNew() {
     var now = new Date();
     var dnum = now.getDate();
